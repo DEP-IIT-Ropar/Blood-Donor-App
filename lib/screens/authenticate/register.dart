@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/services/auth.dart';
-import 'package:myapp/shared/constants.dart';
+import 'package:flutter_app/services/auth.dart';
+import 'package:flutter_app/shared/constants.dart';
 
 class Register extends StatefulWidget {
 
@@ -72,21 +72,21 @@ class _RegisterState extends State<Register> {
               SizedBox(height: 20.0),
               TextFormField(
                   decoration: textInputDecoration.copyWith(hintText: 'Phone Number'),
-                 //obscureText: true,
+                  //obscureText: true,
                   validator: (val) => val.length == 11 ? 'Enter a valid phone number' : null,
-                 onChanged: (val){
-                   setState(() => phone =val);
-                 }
+                  onChanged: (val){
+                    setState(() => phone =val);
+                  }
               ),
 
               SizedBox(height: 20.0),
               TextFormField(
-                  decoration: textInputDecoration.copyWith(hintText: 'Blood Group'),
+                decoration: textInputDecoration.copyWith(hintText: 'Blood Group'),
                 // obscureText: true,
-                 // validator: (val) => val.length == 10 ? 'Enter a valid phone number' : null,
-                  //onChanged: (val){
-                   // setState(() => phone =val);
-                 // }
+                // validator: (val) => val.length == 10 ? 'Enter a valid phone number' : null,
+                onChanged: (val){
+                 setState(() => group =val);
+                 }
               ),
 
               SizedBox(height: 20.0),
@@ -98,7 +98,7 @@ class _RegisterState extends State<Register> {
                 ),
                 onPressed: () async{
                   if(_formKey.currentState.validate()){
-                    dynamic result = await _auth.registerWithEmailAndPassword(email,password);
+                    dynamic result = await _auth.registerWithEmailAndPassword(email,password,phone,group);
                     if(result == null){
                       setState(() => error = 'please enter a valid email');
                     }
@@ -116,7 +116,7 @@ class _RegisterState extends State<Register> {
 
 
 
-    ),
+      ),
     );
   }
 }
