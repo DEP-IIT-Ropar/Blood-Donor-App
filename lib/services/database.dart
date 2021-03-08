@@ -6,14 +6,17 @@ class DatabaseService {
   DatabaseService({this.uid});
   //collection ref
 
-  final CollectionReference donorCollection = Firestore.instance.collection('donors');
+  final CollectionReference donorCollection = Firestore.instance.collection('userInfo');
 
-  Future updateUserData(String name ,String bloodgrp, String location) async {
+  Future updateUserData(String phone ,String Name,String bloodgrp, String country, String state, String city) async {
 
     return await donorCollection.document(uid).setData({
-     'name' : name,
+      'phone': phone
+     'name' : Name,
      'bloodgrp' : bloodgrp,
-     'location' : location,
+     'Country' : country,
+      'State': state,
+      'city': city,
 
     });
 
