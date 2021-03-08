@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/models/user.dart';
 import 'package:myapp/screens/authenticate/authenticate.dart';
+import 'package:myapp/screens/authenticate/phoneverify.dart';
 
 
 import 'package:myapp/screens/home/home.dart';
@@ -13,6 +14,8 @@ class Wrapper extends StatelessWidget {
    final user = Provider.of<User>(context);
 
    // return home or authenticate widget
+
+   // bool showSignIn = true;
 
     if(user == null){
       return Authenticate();

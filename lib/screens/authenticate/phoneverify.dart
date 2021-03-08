@@ -1,23 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/screens/authenticate/register.dart';
+import 'package:myapp/screens/authenticate/sign_in.dart';
 import 'package:myapp/screens/home/home.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:myapp/services/auth.dart';
 import 'package:myapp/shared/constants.dart';
 import 'package:myapp/shared/loading.dart';
 
-class SignIn extends StatefulWidget {
+class phoneverify extends StatefulWidget {
+
   final Function toggleView;
-  SignIn({this.toggleView});
+  phoneverify({this.toggleView});
 
   @override
-  _SignInState createState() => _SignInState();
+  _phoneverifyState createState() => _phoneverifyState();
 }
 
-class _SignInState extends State<SignIn> {
+class _phoneverifyState extends State<phoneverify> {
 
   final _phoneController = TextEditingController();
   final _codeController = TextEditingController();
 
-
+ String bloodgrp;
+ String location;
 
   final AuthService _auth = AuthService();
   @override
@@ -26,13 +31,13 @@ class _SignInState extends State<SignIn> {
 
         backgroundColor: Colors.white30,
         appBar: AppBar(
-          title: Text('Sign as blood donor'),
+          title: Text('Register as blood donor'),
           backgroundColor: Colors.red[400],
           elevation: 0.0,
           actions: <Widget>[
             FlatButton.icon(
               icon: Icon(Icons.person),
-              label: Text('Register'),
+              label: Text('Sign In'),
               onPressed: (){
                 widget.toggleView();
               },
@@ -60,23 +65,34 @@ class _SignInState extends State<SignIn> {
                     controller: _phoneController,
                   ),
 
-                  SizedBox(height: 20.0),
+                  SizedBox(height: 16,),
 
+                  TextFormField(
+                    decoration: textInputDecoration.copyWith(hintText: 'Blood Group'),
+                  ),
+
+                  SizedBox(height: 16,),
+
+                  TextFormField(
+                    decoration: textInputDecoration.copyWith(hintText: 'Location'),
+                  ),
+
+                  SizedBox(height: 20.0),
 
                   RaisedButton(
                     //width: double.infinity,
 
-                    child: Text("Sign In"),
-                    textColor: Colors.white,
-                    // padding: EdgeInsets.all(16),
-                    onPressed: () async {
-                      final phone = _phoneController.text.trim();
+                      child: Text("Register"),
+                      textColor: Colors.white,
+                     // padding: EdgeInsets.all(16),
+                      onPressed: () async {
+                        final phone = _phoneController.text.trim();
 
-                      dynamic result = await _auth.loginUser(phone, context);
+                        dynamic result = await _auth.registerUser(phone, context);
 
-                      // loginUser(phone, context);
-                    },
-                    color: Colors.red,
+                       // loginUser(phone, context);
+                      },
+                      color: Colors.red,
 
 
                   )
@@ -87,4 +103,5 @@ class _SignInState extends State<SignIn> {
         )
     );
   }
+
 }

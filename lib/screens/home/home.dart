@@ -8,7 +8,7 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.white30,
       appBar: AppBar(
         title: Text('Blood Donor App'),
         backgroundColor: Colors.red[400],
