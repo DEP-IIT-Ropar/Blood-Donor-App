@@ -8,11 +8,11 @@ class DatabaseService {
 
   final CollectionReference donorCollection = Firestore.instance.collection('userInfo');
 
-  Future updateUserData(String phone ,String Name,String bloodgrp, String country, String state, String city) async {
+  Future updateUserData(String phone ,String name,String bloodgrp, String country, String state, String city) async {
 
     return await donorCollection.document(uid).setData({
       'phone': phone
-     'name' : Name,
+     'name' : name,
      'bloodgrp' : bloodgrp,
      'Country' : country,
       'State': state,
