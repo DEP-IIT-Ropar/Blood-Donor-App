@@ -22,9 +22,14 @@ class _phoneverifyState extends State<phoneverify> {
   final _codeController = TextEditingController();
 
  String bloodgrp;
- String location;
+ String country;
+ String State;
+ String phone;
+ String city;
+ String Name;
 
   final AuthService _auth = AuthService();
+   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,18 +68,55 @@ class _phoneverifyState extends State<phoneverify> {
                   TextFormField(
                     decoration: textInputDecoration.copyWith(hintText: 'Moblie number'),
                     controller: _phoneController,
+                    
+                  
                   ),
 
+                  SizedBox(height: 16,),
+
+                  TextFormField(
+                    decoration: textInputDecoration.copyWith(hintText: 'Name'),
+                    validator: (val) => val.isEmpty ? 'Enter your Name' : null,
+                    onChanged: (val){
+                    setState(() => Name =val);
+                  ),
+                  
+                  
                   SizedBox(height: 16,),
 
                   TextFormField(
                     decoration: textInputDecoration.copyWith(hintText: 'Blood Group'),
+                    validator: (val) => val.isEmpty ? 'Enter your Blood group' : null,
+                    onChanged: (val){
+                    setState(() => bloodgrp =val);
                   ),
+
 
                   SizedBox(height: 16,),
 
                   TextFormField(
-                    decoration: textInputDecoration.copyWith(hintText: 'Location'),
+                    decoration: textInputDecoration.copyWith(hintText: 'Country'),
+                    validator: (val) => val.isEmpty ? 'Enter country' : null,
+                    onChanged: (val){
+                    setState(() => country =val);
+                  ),
+                      
+                  SizedBox(height: 16,),
+
+                  TextFormField(
+                    decoration: textInputDecoration.copyWith(hintText: 'state'),
+                    validator: (val) => val.isEmpty ? 'Enter state' : null,
+                    onChanged: (val){
+                    setState(() => state =val);
+                  ),
+                     
+                  SizedBox(height: 16,),
+
+                  TextFormField(
+                    decoration: textInputDecoration.copyWith(hintText: 'city'),
+                    validator: (val) => val.isEmpty ? 'Enter city' : null,
+                    onChanged: (val){
+                    setState(() => city =val);
                   ),
 
                   SizedBox(height: 20.0),
@@ -88,7 +130,7 @@ class _phoneverifyState extends State<phoneverify> {
                       onPressed: () async {
                         final phone = _phoneController.text.trim();
 
-                        dynamic result = await _auth.registerUser(phone, context);
+                        dynamic result = await _auth.registerUser(phone, context,Name,bloodgrp,country,state,city);
 
                        // loginUser(phone, context);
                       },
