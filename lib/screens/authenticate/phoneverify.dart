@@ -23,10 +23,10 @@ class _phoneverifyState extends State<phoneverify> {
 
  String bloodgrp;
  String country;
- String State;
+ String state;
  String phone;
  String city;
- String Name;
+ String name;
 
   final AuthService _auth = AuthService();
    final _formKey = GlobalKey<FormState>();
