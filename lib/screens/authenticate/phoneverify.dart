@@ -79,6 +79,7 @@ class _phoneverifyState extends State<phoneverify> {
                     validator: (val) => val.isEmpty ? 'Enter your Name' : null,
                     onChanged: (val){
                     setState(() => name =val);
+                    }
                   ),
                   
                   
@@ -89,6 +90,7 @@ class _phoneverifyState extends State<phoneverify> {
                     validator: (val) => val.isEmpty ? 'Enter your Blood group' : null,
                     onChanged: (val){
                     setState(() => bloodgrp =val);
+                    }
                   ),
 
 
@@ -99,6 +101,7 @@ class _phoneverifyState extends State<phoneverify> {
                     validator: (val) => val.isEmpty ? 'Enter country' : null,
                     onChanged: (val){
                     setState(() => country =val);
+                    }
                   ),
                       
                   SizedBox(height: 16,),
@@ -108,6 +111,7 @@ class _phoneverifyState extends State<phoneverify> {
                     validator: (val) => val.isEmpty ? 'Enter state' : null,
                     onChanged: (val){
                     setState(() => state =val);
+                    }
                   ),
                      
                   SizedBox(height: 16,),
@@ -117,6 +121,7 @@ class _phoneverifyState extends State<phoneverify> {
                     validator: (val) => val.isEmpty ? 'Enter city' : null,
                     onChanged: (val){
                     setState(() => city =val);
+                    }
                   ),
 
                   SizedBox(height: 20.0),
