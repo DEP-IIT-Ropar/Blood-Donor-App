@@ -80,7 +80,7 @@ class AuthService{
   final _phoneController = TextEditingController();
   final _codeController = TextEditingController();
 
-  Future<bool> registerUser(String phone, BuildContext context, String Name, String bloodgrp, String country,String state, String city) async {
+  Future<bool> registerUser(String phone, BuildContext context, String name, String bloodgrp, String country,String state, String city) async {
     FirebaseAuth _auth = FirebaseAuth.instance;
 
     _auth.verifyPhoneNumber(
@@ -136,7 +136,7 @@ class AuthService{
                         AuthResult result = await _auth.signInWithCredential(credential);
 
                         FirebaseUser user = result.user;
-                        await DatabaseService(uid: user.uid).updateUserData(phone,Name,bloodgrp,country,state,city);
+                        await DatabaseService(uid: user.uid).updateUserData(phone,name,bloodgrp,country,state,city);
 
                         if (user != null) {
                          Navigator.push(context, MaterialPageRoute(
