@@ -11,7 +11,7 @@ class DatabaseService {
   Future updateUserData(String phone ,String name,String bloodgrp, String country, String state, String city) async {
 
     return await donorCollection.document(uid).setData({
-      'phone': phone
+      'phone': phone,
      'name' : name,
      'bloodgrp' : bloodgrp,
      'Country' : country,
