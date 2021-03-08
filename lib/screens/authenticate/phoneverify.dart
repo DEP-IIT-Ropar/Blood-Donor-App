@@ -78,7 +78,7 @@ class _phoneverifyState extends State<phoneverify> {
                     decoration: textInputDecoration.copyWith(hintText: 'Name'),
                     validator: (val) => val.isEmpty ? 'Enter your Name' : null,
                     onChanged: (val){
-                    setState(() => Name =val);
+                    setState(() => name =val);
                   ),
                   
                   
@@ -130,7 +130,7 @@ class _phoneverifyState extends State<phoneverify> {
                       onPressed: () async {
                         final phone = _phoneController.text.trim();
 
-                        dynamic result = await _auth.registerUser(phone, context,Name,bloodgrp,country,state,city);
+                        dynamic result = await _auth.registerUser(phone, context,name,bloodgrp,country,state,city);
 
                        // loginUser(phone, context);
                       },
