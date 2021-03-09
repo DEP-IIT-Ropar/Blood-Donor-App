@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/screens/authenticate/phoneverify.dart';
-import 'package:myapp/screens/authenticate/register.dart';
+
 import 'package:myapp/screens/authenticate/sign_in.dart';
 
 class Authenticate extends StatefulWidget {

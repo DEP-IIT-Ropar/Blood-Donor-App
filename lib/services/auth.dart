@@ -11,12 +11,12 @@ class AuthService{
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  
+
   //create user object based on firebase user
   User _userFromFirebaseUser(FirebaseUser user){
-    
+
     return user != null ? User(uid: user.uid) : null;
-    
+
   }
 
   //auth change user streaam
@@ -24,26 +24,26 @@ class AuthService{
   Stream<User> get user{
     return _auth.onAuthStateChanged
 
-    .map(_userFromFirebaseUser);
+        .map(_userFromFirebaseUser);
   }
 
   // sign in anon
- Future signInAnon() async{
+  Future signInAnon() async{
 
-   try{
-     AuthResult result = await _auth.signInAnonymously();
-     FirebaseUser user = result.user;
-     return _userFromFirebaseUser(user);
+    try{
+      AuthResult result = await _auth.signInAnonymously();
+      FirebaseUser user = result.user;
+      return _userFromFirebaseUser(user);
 
-   } catch(e){
+    } catch(e){
 
-     print(e.toString());
-     return null;
+      print(e.toString());
+      return null;
 
-   }
- }
+    }
+  }
 
- //sign in with email and password
+  //sign in with email and password
   Future signInWithEmailAndPassword(String email, String password) async{
     try{
       AuthResult result = await _auth.signInWithEmailAndPassword(email: email, password: password);
@@ -59,7 +59,7 @@ class AuthService{
 
 
   //Register in with email and password
-  Future registerWithEmailAndPassword(String email, String password) async{
+  /*Future registerWithEmailAndPassword(String email, String password) async{
     try{
 
       AuthResult result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
@@ -69,10 +69,10 @@ class AuthService{
       await DatabaseService(uid: user.uid).updateUserData('name', 'bloodgrp', 'location');
       return _userFromFirebaseUser(user);
     }catch(e){
-       print(e.toString());
-       return null;
+      print(e.toString());
+      return null;
     }
-  }
+  }*/
 
 
   //register with moblie number
@@ -80,7 +80,7 @@ class AuthService{
   final _phoneController = TextEditingController();
   final _codeController = TextEditingController();
 
-  Future<bool> registerUser(String phone, BuildContext context, String name, String bloodgrp, String country,String state, String city) async {
+  Future<bool> registerUser(String phone, BuildContext context,String name, String bloodgrp, String country,String state, String city) async {
     FirebaseAuth _auth = FirebaseAuth.instance;
 
     _auth.verifyPhoneNumber(
@@ -139,13 +139,13 @@ class AuthService{
                         await DatabaseService(uid: user.uid).updateUserData(phone,name,bloodgrp,country,state,city);
 
                         if (user != null) {
-                         Navigator.push(context, MaterialPageRoute(
-                             builder: (context) => Home()
-                         ));
-                       } else {
+                          Navigator.push(context, MaterialPageRoute(
+                              builder: (context) => Home()
+                          ));
+                        } else {
                           print("Error");
                         }
-                     //   }
+                        //   }
                       },
                     )
                   ],
@@ -216,8 +216,8 @@ class AuthService{
                         AuthResult result = await _auth.signInWithCredential(credential);
 
                         FirebaseUser user = result.user;
-                        
-                        
+
+
 
                         if (user != null) {
                           Navigator.push(context, MaterialPageRoute(
@@ -242,14 +242,14 @@ class AuthService{
 
 
   //sign out
- Future signOut() async {
+  Future signOut() async {
     try{
       return await _auth.signOut();
     } catch(e){
       print(e.toString());
       return null;
     }
- }
+  }
 
 
 }
