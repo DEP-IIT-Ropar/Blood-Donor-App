@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:myapp/services/auth.dart';
+import 'package:myapp/screens/home/findonor.dart';
 
 class Home extends StatelessWidget {
 
@@ -8,9 +9,9 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.white30,
       appBar: AppBar(
-        title: Text('Blood Donor App'),
+        title: Text('HOME'),
         backgroundColor: Colors.red[400],
         elevation: 0.0,
         actions:<Widget> [
@@ -20,8 +21,18 @@ class Home extends StatelessWidget {
             onPressed: () async{
               await _auth.signOut();
             },
+          ),
+          FlatButton.icon(
+            icon: Icon(Icons.search),
+            label: Text('Search'),
+            onPressed: () async{
+              Navigator.push(context, MaterialPageRoute(
+                  builder: (context) => Findonor()
+              ));
+            },
           )
         ],
+
       ),
     );
   }
