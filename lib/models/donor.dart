@@ -7,7 +7,7 @@ class Donor{
   final String state;
   final String country;
 
-  Donor({this.phone,this.name,this.bloodgrp,this.city,this.state,this.country});
+  Donor({this.phone,this.name,this.bloodgrp,this.country,this.state,this.city});
 
 
 }

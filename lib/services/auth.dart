@@ -93,13 +93,7 @@ class AuthService{
 
           FirebaseUser user = result.user;
 
-          if(user != null){
-            Navigator.push(context, MaterialPageRoute(
-                builder: (context) => Home()
-            ));
-          }else{
-            print("Error");
-          }
+          return _userFromFirebaseUser(user);
 
           //This callback would gets called when verification is done auto maticlly
         },
@@ -128,24 +122,24 @@ class AuthService{
                       textColor: Colors.white,
                       color: Colors.red,
                       onPressed: () async {
-                        final code = _codeController.text.trim();
-                        AuthCredential credential = PhoneAuthProvider
-                            .getCredential(
-                            verificationId: verificationId, smsCode: code);
+                        try {
+                          final code = _codeController.text.trim();
+                          AuthCredential credential = PhoneAuthProvider
+                              .getCredential(
+                              verificationId: verificationId, smsCode: code);
 
-                        AuthResult result = await _auth.signInWithCredential(credential);
+                          AuthResult result = await _auth.signInWithCredential(
+                              credential);
 
-                        FirebaseUser user = result.user;
-                        await DatabaseService(uid: user.uid).updateUserData(phone,name,bloodgrp,country,state,city);
+                          FirebaseUser user = result.user;
+                          await DatabaseService(uid: user.uid).updateUserData(phone, name, bloodgrp, country, state, city);
 
-                        if (user != null) {
-                          Navigator.push(context, MaterialPageRoute(
-                              builder: (context) => Home()
-                          ));
-                        } else {
-                          print("Error");
+                          return _userFromFirebaseUser(user);
+                          //   }
+                        } catch(e){
+                          print(e.toString());
+                          return null;
                         }
-                        //   }
                       },
                     )
                   ],
@@ -158,7 +152,7 @@ class AuthService{
   }
 
 
-// Register with moblie number
+// login with moblie number
 
   Future<bool> loginUser(String phone, BuildContext context) async {
     FirebaseAuth _auth = FirebaseAuth.instance;
@@ -173,13 +167,7 @@ class AuthService{
 
           FirebaseUser user = result.user;
 
-          if(user != null){
-            Navigator.push(context, MaterialPageRoute(
-                builder: (context) => Home()
-            ));
-          }else{
-            print("Error");
-          }
+          return _userFromFirebaseUser(user);
 
           //This callback would gets called when verification is done auto maticlly
         },
@@ -216,17 +204,8 @@ class AuthService{
                         AuthResult result = await _auth.signInWithCredential(credential);
 
                         FirebaseUser user = result.user;
+                        return _userFromFirebaseUser(user);
 
-
-
-                        if (user != null) {
-                          Navigator.push(context, MaterialPageRoute(
-                              builder: (context) => Home()
-                          ));
-                        } else {
-                          print("Error");
-                        }
-                        //   }
                       },
                     )
                   ],

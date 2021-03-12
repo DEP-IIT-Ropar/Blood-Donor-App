@@ -6,6 +6,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:myapp/services/auth.dart';
 import 'package:myapp/shared/constants.dart';
 import 'package:myapp/shared/loading.dart';
+import 'package:restcountries/restcountries.dart';
+
 
 class phoneverify extends StatefulWidget {
 
@@ -27,9 +29,10 @@ class _phoneverifyState extends State<phoneverify> {
   String phone;
   String city;
   String name;
-
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
+  final List<String> bloodgrps = ['A+','A-','B+','B-','AB+','AB-','O+','O-'];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,13 +88,22 @@ class _phoneverifyState extends State<phoneverify> {
 
     SizedBox(height: 16,),
 
-    TextFormField(
-    decoration: textInputDecoration.copyWith(hintText: 'Blood Group'),
-    validator: (val) => val.isEmpty ? 'Enter your Blood group' : null,
-    onChanged: (val){
-    setState(() => bloodgrp =val);
-    }
+    DropdownButtonFormField(
+      //value: _ ,
+      decoration: textInputDecoration.copyWith(hintText: 'Blood Group'),
+      items: bloodgrps.map((bloodgrp){
+        return DropdownMenuItem(
+         value: bloodgrp,
+          child: Text('$bloodgrp'),
+        );
+      } ).toList(),
+        validator: (val) => val.isEmpty ? 'Select your blood group' : null,
+        onChanged: (val){
+          setState(() => bloodgrp =val);
+        }
     ),
+
+
 
 
     SizedBox(height: 16,),
@@ -129,8 +141,11 @@ class _phoneverifyState extends State<phoneverify> {
     RaisedButton(
     //width: double.infinity,
 
-    child: Text("Register"),
-    textColor: Colors.white,
+    child: Text(
+      'Register',
+      style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+    ),
+
     // padding: EdgeInsets.all(16),
     onPressed: () async {
     final phone = _phoneController.text.trim();

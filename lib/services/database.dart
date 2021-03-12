@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:myapp/models/donor.dart';
+import 'package:myapp/models/user.dart';
 
 class DatabaseService {
 
@@ -32,12 +33,28 @@ class DatabaseService {
 
         name: doc.data['name'] ,
         bloodgrp: doc.data['bloodgrp'],
+        country: doc.data['Country'],
+        state: doc.data['State'],
         city: doc.data['city'],
-        state: doc.data['state'],
+
+
+        phone: doc.data['phone'],
 
       );
     }
     ).toList();
+  }
+
+  UserData _userDataFromSnapshot(DocumentSnapshot snapshot){
+    return UserData(
+      uid: uid,
+      name: snapshot.data['name'],
+      bloodgrp: snapshot.data['bloodgrp'],
+      country: snapshot.data['Country'],
+      state: snapshot.data['State'],
+      city: snapshot.data['city'],
+
+    );
   }
 
 
@@ -46,5 +63,10 @@ Stream<List<Donor>> get donors{
     .map(_donorListFromSnapshot);
 }
 
+Stream<UserData> get userData{
+
+    return donorCollection.document(uid).snapshots()
+        .map(_userDataFromSnapshot);
+}
 
 }
