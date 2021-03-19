@@ -24,10 +24,9 @@ class _phoneverifyState extends State<phoneverify> {
   final _codeController = TextEditingController();
 
   String bloodgrp;
-  String country;
-  String state;
+
   String phone;
-  String city;
+
   String name;
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
@@ -37,7 +36,7 @@ class _phoneverifyState extends State<phoneverify> {
   Widget build(BuildContext context) {
     return Scaffold(
 
-        backgroundColor: Colors.white30,
+        backgroundColor: Colors.white,
         appBar: AppBar(
         title: Text('Register as blood donor'),
     backgroundColor: Colors.red[400],
@@ -106,35 +105,7 @@ class _phoneverifyState extends State<phoneverify> {
 
 
 
-    SizedBox(height: 16,),
 
-    TextFormField(
-    decoration: textInputDecoration.copyWith(hintText: 'Country'),
-    validator: (val) => val.isEmpty ? 'Enter country' : null,
-    onChanged: (val){
-    setState(() => country =val);
-    }
-    ),
-
-    SizedBox(height: 16,),
-
-    TextFormField(
-    decoration: textInputDecoration.copyWith(hintText: 'state'),
-    validator: (val) => val.isEmpty ? 'Enter state' : null,
-    onChanged: (val){
-    setState(() => state =val);
-    }
-    ),
-
-    SizedBox(height: 16,),
-
-    TextFormField(
-    decoration: textInputDecoration.copyWith(hintText: 'city'),
-    validator: (val) => val.isEmpty ? 'Enter city' : null,
-    onChanged: (val) {
-      setState(() => city = val);
-    }
-    ),
 
     SizedBox(height: 20.0),
 
@@ -150,7 +121,7 @@ class _phoneverifyState extends State<phoneverify> {
     onPressed: () async {
     final phone = _phoneController.text.trim();
 
-    dynamic result = await _auth.registerUser(phone,context,name,bloodgrp,country,state,city);
+    dynamic result = await _auth.registerUser(phone,context,name,bloodgrp);
 
     // loginUser(phone, context);
     },

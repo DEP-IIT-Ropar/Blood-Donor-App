@@ -12,15 +12,13 @@ class DatabaseService {
   final CollectionReference donorCollection = Firestore.instance.collection('userInfo');
 
 
-  Future updateUserData(String phone ,String name,String bloodgrp, String country, String state, String city) async {
+  Future updateUserData(String phone ,String name,String bloodgrp) async {
 
     return await donorCollection.document(uid).setData({
       'phone': phone,
       'name' : name,
       'bloodgrp' : bloodgrp,
-      'Country' : country,
-      'State': state,
-      'city': city,
+
 
     });
 
@@ -33,9 +31,7 @@ class DatabaseService {
 
         name: doc.data['name'] ,
         bloodgrp: doc.data['bloodgrp'],
-        country: doc.data['Country'],
-        state: doc.data['State'],
-        city: doc.data['city'],
+
 
 
         phone: doc.data['phone'],
@@ -50,9 +46,7 @@ class DatabaseService {
       uid: uid,
       name: snapshot.data['name'],
       bloodgrp: snapshot.data['bloodgrp'],
-      country: snapshot.data['Country'],
-      state: snapshot.data['State'],
-      city: snapshot.data['city'],
+
 
     );
   }

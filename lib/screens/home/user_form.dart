@@ -20,9 +20,7 @@ class _UserFormState extends State<UserForm> {
   String _currentName;
   String _currentBloodgrp;
   String _currentPhone;
-  String _currentState;
-  String _currentCountry;
-  String _currentCity;
+
 
   @override
   Widget build(BuildContext context) {
@@ -82,47 +80,7 @@ class _UserFormState extends State<UserForm> {
                       }
                   ),
 
-                  SizedBox(height: 20.0),
-                  Text(
-                    'Country',
-                    style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),
-                  ),
-                  TextFormField(
-                      initialValue: userData.country,
-                      decoration: textInputDecoration.copyWith(hintText: 'country'),
-                      validator: (val) => val.isEmpty ? 'Enter country' : null,
-                      onChanged: (val){
-                        setState(() => _currentCountry =val);
-                      }
-                  ),
 
-                  SizedBox(height: 20.0),
-                  Text(
-                    'State',
-                    style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),
-                  ),
-                  TextFormField(
-                      initialValue: userData.state,
-                      decoration: textInputDecoration.copyWith(hintText: 'state'),
-                      validator: (val) => val.isEmpty ? 'Enter state' : null,
-                      onChanged: (val){
-                        setState(() => _currentState=val);
-                      }
-                  ),
-
-                  SizedBox(height: 20.0),
-                  Text(
-                    'City',
-                    style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),
-                  ),
-                  TextFormField(
-                      initialValue: userData.city,
-                      decoration: textInputDecoration.copyWith(hintText: 'city'),
-                      validator: (val) => val.isEmpty ? 'Enter city' : null,
-                      onChanged: (val) {
-                        setState(() => _currentCity = val);
-                      }
-                  ),
 
                   RaisedButton(
 
@@ -138,9 +96,7 @@ class _UserFormState extends State<UserForm> {
                           _currentPhone ?? userData.phone,
                           _currentName ?? userData.name,
                           _currentBloodgrp ?? userData.bloodgrp,
-                          _currentCountry ?? userData.country,
-                          _currentState ?? userData.state,
-                          _currentCity ?? userData.city
+
                         );
                         Navigator.pop(context);
                       }

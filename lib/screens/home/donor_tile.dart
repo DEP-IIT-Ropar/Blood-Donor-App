@@ -28,7 +28,7 @@ class DonorTile extends StatelessWidget {
 
           ),
           title: Text(donor.name),
-          subtitle: Text('Blood group-${donor.bloodgrp}\nLocation-${donor.country},${donor.state},${donor.city}'),
+          subtitle: Text('Blood group-${donor.bloodgrp}'),
 
         ),
       ),

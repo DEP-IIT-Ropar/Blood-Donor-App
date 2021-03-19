@@ -26,7 +26,7 @@ class _SignInState extends State<SignIn> {
     return Scaffold(
 
         resizeToAvoidBottomInset: false,
-        backgroundColor: Colors.white30,
+        backgroundColor: Colors.white,
         appBar: AppBar(
           title: Text(
               'Sign In as blood donor',
@@ -89,7 +89,7 @@ class _SignInState extends State<SignIn> {
                   SizedBox(height: 20.0),
                   Text(
                       '\nsearching for a blood donor?\n',
-                    style: TextStyle(color: Colors.white , fontWeight: FontWeight.w600 , fontSize: 16.0),
+                    style: TextStyle(color: Colors.black , fontWeight: FontWeight.w600 , fontSize: 16.0),
 
 
                   ),
