@@ -6,6 +6,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:myapp/services/auth.dart';
 import 'package:myapp/shared/constants.dart';
 import 'package:myapp/shared/loading.dart';
+import 'package:restcountries/restcountries.dart';
+
 
 class phoneverify extends StatefulWidget {
 
@@ -22,19 +24,19 @@ class _phoneverifyState extends State<phoneverify> {
   final _codeController = TextEditingController();
 
   String bloodgrp;
-  String country;
-  String state;
-  String phone;
-  String city;
-  String name;
 
+  String phone;
+
+  String name;
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
+  final List<String> bloodgrps = ['A+','A-','B+','B-','AB+','AB-','O+','O-'];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
 
-        backgroundColor: Colors.white30,
+        backgroundColor: Colors.white,
         appBar: AppBar(
         title: Text('Register as blood donor'),
     backgroundColor: Colors.red[400],
@@ -85,57 +87,41 @@ class _phoneverifyState extends State<phoneverify> {
 
     SizedBox(height: 16,),
 
-    TextFormField(
-    decoration: textInputDecoration.copyWith(hintText: 'Blood Group'),
-    validator: (val) => val.isEmpty ? 'Enter your Blood group' : null,
-    onChanged: (val){
-    setState(() => bloodgrp =val);
-    }
+    DropdownButtonFormField(
+      //value: _ ,
+      decoration: textInputDecoration.copyWith(hintText: 'Blood Group'),
+      items: bloodgrps.map((bloodgrp){
+        return DropdownMenuItem(
+         value: bloodgrp,
+          child: Text('$bloodgrp'),
+        );
+      } ).toList(),
+        validator: (val) => val.isEmpty ? 'Select your blood group' : null,
+        onChanged: (val){
+          setState(() => bloodgrp =val);
+        }
     ),
 
 
-    SizedBox(height: 16,),
 
-    TextFormField(
-    decoration: textInputDecoration.copyWith(hintText: 'Country'),
-    validator: (val) => val.isEmpty ? 'Enter country' : null,
-    onChanged: (val){
-    setState(() => country =val);
-    }
-    ),
 
-    SizedBox(height: 16,),
 
-    TextFormField(
-    decoration: textInputDecoration.copyWith(hintText: 'state'),
-    validator: (val) => val.isEmpty ? 'Enter state' : null,
-    onChanged: (val){
-    setState(() => state =val);
-    }
-    ),
-
-    SizedBox(height: 16,),
-
-    TextFormField(
-    decoration: textInputDecoration.copyWith(hintText: 'city'),
-    validator: (val) => val.isEmpty ? 'Enter city' : null,
-    onChanged: (val) {
-      setState(() => city = val);
-    }
-    ),
 
     SizedBox(height: 20.0),
 
     RaisedButton(
     //width: double.infinity,
 
-    child: Text("Register"),
-    textColor: Colors.white,
+    child: Text(
+      'Register',
+      style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+    ),
+
     // padding: EdgeInsets.all(16),
     onPressed: () async {
     final phone = _phoneController.text.trim();
 
-    dynamic result = await _auth.registerUser(phone,context,name,bloodgrp,country,state,city);
+    dynamic result = await _auth.registerUser(phone,context,name,bloodgrp);
 
     // loginUser(phone, context);
     },

@@ -29,6 +29,9 @@ class _FindonorState extends State<Findonor> {
   String bloodgrp;
   String city;
   String state;
+  String country;
+  String name;
+  String phone;
 
   @override
   Widget build(BuildContext context) {
